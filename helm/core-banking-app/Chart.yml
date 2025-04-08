@@ -1,0 +1,4 @@
+apiVersion: v2
+name: core-banking-app
+description: A Helm chart for core banking app
+version: 0.1.0

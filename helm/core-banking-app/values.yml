@@ -1,0 +1,13 @@
+replicaCount: 2
+
+backendApi:
+  image: qclaire/backend-api:latest
+  port: 8080
+
+frontend:
+  image: qclaire/frontend:latest
+  port: 80
+
+transactionService:
+  image: qclaire/transaction-service:latest
+  port: 5000
