@@ -1,6 +1,6 @@
 // API Configuration
-const API_URL = '/api';
-const PROCESSOR_URL = '/processor';
+const API_URL = 'ac3956a0c300e4547b4dc84372b37708-1072028778.us-west-1.elb.amazonaws.com';
+const PROCESSOR_URL = 'a894416a1adac4070acb074e35b6d131-57445221.us-west-1.elb.amazonaws.com';
 
 // DOM Elements
 const dashboardView = document.getElementById('dashboard-view');
