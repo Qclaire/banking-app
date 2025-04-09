@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-backend-api
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: {{ .Values.backendApi.port }}
     targetPort: {{ .Values.backendApi.port }}

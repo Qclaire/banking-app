@@ -1,6 +1,6 @@
 // API Configuration
-const API_URL = 'http://api:8080';
-const PROCESSOR_URL = 'http://processor:5000';
+const API_URL = 'http://core-banking-app-backend-api:8080';
+const PROCESSOR_URL = 'http://core-banking-app-transaction-service:5000';
 
 // DOM Elements
 const dashboardView = document.getElementById('dashboard-view');
