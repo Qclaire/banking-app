@@ -68,12 +68,15 @@ jobs:
           cat ~/.kube/config  # Debug: Verify kubeconfig
 
       - name: Deploy Helm Chart
+        env:
+          SHA=${{ github.sha }}
         run: |
+          SHORT_SHA=${SHORT_SHA:0:7}
           helm upgrade --install core-banking-app ./helm/core-banking-app \
           --namespace default \
-          --set backendApi.image=qclaire/backend-api:${{ github.sha }} \
-          --set frontend.image=qclaire/frontend:${{ github.sha }} \
-          --set transactionService.image=qclaire/transaction-service:${{ github.sha }}
+          --set backendApi.image=qclaire/backend-api:$SHORT_SHA \
+          --set frontend.image=qclaire/frontend:$SHORT_SHA \
+          --set transactionService.image=qclaire/transaction-service:$SHORT_SHA
         env:
           KUBECONFIG: ${{ env.KUBECONFIG }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
