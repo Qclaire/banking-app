@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'http://core-banking-app-backend-api:8080';
+const API_URL = '/api';
 const PROCESSOR_URL = 'http://core-banking-app-transaction-service:5000';
 
 // DOM Elements
