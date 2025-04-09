@@ -35,12 +35,12 @@ jobs:
           docker push qclaire/transaction-service:latest
       - name: Update Helm Values
         run: |
-          sed -i "s|backendApi.image: .*|backendApi.image: myrepo/backend-api:${{ github.sha }}|" helm/core-banking-app/values.yml
-          sed -i "s|frontend.image: .*|frontend.image: myrepo/frontend:${{ github.sha }}|" helm/core-banking-app/values.yml
-          sed -i "s|transactionService.image: .*|transactionService.image: myrepo/transaction-service:${{ github.sha }}|" helm/core-banking-app/values.yml
+          sed -i "s|backendApi.image: .*|backendApi.image: qclaire/backend-api:${{ github.sha }}|" ./helm/core-banking-app/values.yml
+          sed -i "s|frontend.image: .*|frontend.image: qclaire/frontend:${{ github.sha }}|" ./helm/core-banking-app/values.yml
+          sed -i "s|transactionService.image: .*|transactionService.image: qclaire/transaction-service:${{ github.sha }}|" ./helm/core-banking-app/values.yml
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add helm/core-banking-app/values.yml
+          git add ./helm/core-banking-app/values.yml
           git commit -m "Update Helm chart with new image tags"
           git push
 
