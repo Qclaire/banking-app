@@ -55,7 +55,12 @@ jobs:
           cat ~/.kube/config  # Debug: Verify kubeconfig
 
       - name: Deploy Helm Chart
-        run: helm upgrade --install core-banking-app ./helm/core-banking-app --namespace default
+        run: |
+          helm upgrade --install core-banking-app ./helm/core-banking-app \
+          --namespace default \
+          --set backendApi.image=qclaire/backend-api:${{ github.sha }} \
+          --set frontend.image=qclaire/frontend:${{ github.sha }} \
+          --set transactionService.image=qclaire/transaction-service:${{ github.sha }}
         env:
           KUBECONFIG: ${{ env.KUBECONFIG }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
