@@ -26,21 +26,24 @@ jobs:
 
       - name: Build and Push Docker Images
         env:
-          SHA: ${{ github.sha }}
+          SHORT_SHA: ${{ github.sha }}
         run: |
+          SHORT_SHA=${SHORT_SHA:0:7}
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-          docker build -t qclaire/backend-api:$SHA -t qclaire/backend-api:latest ./backend-api
-          docker build -t qclaire/frontend:$SHA -t qclaire/frontend:latest ./frontend
-          docker build -t qclaire/transaction-service:$SHA -t qclaire/transaction-service:latest ./transaction-service
-
-          docker push qclaire/backend-api:$SHA
+          # Backend API
+          docker build -t qclaire/backend-api:$SHORT_SHA -t qclaire/backend-api:latest ./backend-api
+          docker push qclaire/backend-api:$SHORT_SHA
           docker push qclaire/backend-api:latest
 
-          docker push qclaire/frontend:$SHA
+          # Frontend
+          docker build -t qclaire/frontend:$SHORT_SHA -t qclaire/frontend:latest ./frontend
+          docker push qclaire/frontend:$SHORT_SHA
           docker push qclaire/frontend:latest
 
-          docker push qclaire/transaction-service:$SHA
+          # Transaction Service
+          docker build -t qclaire/transaction-service:$SHORT_SHA -t qclaire/transaction-service:latest ./transaction-service
+          docker push qclaire/transaction-service:$SHORT_SHA
           docker push qclaire/transaction-service:latest
 
       # - name: Update Helm Values
