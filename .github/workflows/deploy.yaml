@@ -33,7 +33,22 @@ jobs:
           docker push qclaire/backend-api:latest
           docker push qclaire/frontend:latest
           docker push qclaire/transaction-service:latest
+      - name: Update Helm Values
+        run: |
+          sed -i "s|backendApi.image: .*|backendApi.image: myrepo/backend-api:${{ github.sha }}|" helm/core-banking-app/values.yml
+          sed -i "s|frontend.image: .*|frontend.image: myrepo/frontend:${{ github.sha }}|" helm/core-banking-app/values.yml
+          sed -i "s|transactionService.image: .*|transactionService.image: myrepo/transaction-service:${{ github.sha }}|" helm/core-banking-app/values.yml
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add helm/core-banking-app/values.yml
+          git commit -m "Update Helm chart with new image tags"
+          git push
 
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig --region us-west-1 --name tech4dev-cluster
