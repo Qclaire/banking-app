@@ -10,18 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v2
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-west-1
 
-      - name: Install Helm
-        run: |
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          chmod +x get_helm.sh
-          ./get_helm.sh
+      # - name: Install Helm
+      #   run: |
+      #     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+      #     chmod +x get_helm.sh
+      #     ./get_helm.sh
 
       - name: Build and Push Docker Images
         run: |
@@ -33,16 +33,16 @@ jobs:
           docker push qclaire/frontend:latest
           docker push qclaire/transaction-service:latest
 
-      - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region us-west-1 --name tech4dev-cluster
+      # - name: Update kubeconfig
+      #   run: aws eks update-kubeconfig --region us-west-1 --name tech4dev-cluster
 
-      - name: Deploy Helm Chart
-        run: helm upgrade --install core-banking-app ./core-banking-app --namespace default
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-west-1
-          DOCKER_REGISTRY: myrepo
+      # - name: Deploy Helm Chart
+      #   run: helm upgrade --install core-banking-app ./core-banking-app --namespace default
+      #   env:
+      #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: us-west-1
+      #     DOCKER_REGISTRY: qclaire
