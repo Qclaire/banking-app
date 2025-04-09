@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-transaction-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - port: {{ .Values.transactionService.port }}
     targetPort: {{ .Values.transactionService.port }}
