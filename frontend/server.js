@@ -18,8 +18,8 @@ app.get('/api/*', async (req, res) => {
   }
 });
 
-app.get('/transactions/*', async (req, res) => {
-    const url = `${PROCESSOR_URL}${req.path.replace('/transactions', '')}`;
+app.get('/processor/*', async (req, res) => {
+    const url = `${PROCESSOR_URL}${req.path.replace('/processor', '')}`;
     try {
       const response = await fetch(url);
       const data = await response.json();

@@ -1,6 +1,6 @@
 // API Configuration
 const API_URL = '/api';
-const PROCESSOR_URL = '/transactions';
+const PROCESSOR_URL = '/processor';
 
 // DOM Elements
 const dashboardView = document.getElementById('dashboard-view');
