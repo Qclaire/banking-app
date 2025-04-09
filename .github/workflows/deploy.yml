@@ -17,11 +17,11 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: us-west-1
 
-      # - name: Install Helm
-      #   run: |
-      #     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-      #     chmod +x get_helm.sh
-      #     ./get_helm.sh
+      - name: Install Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod +x get_helm.sh
+          ./get_helm.sh
 
       - name: Build and Push Docker Images
         run: |
