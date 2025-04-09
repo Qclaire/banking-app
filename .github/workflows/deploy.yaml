@@ -32,7 +32,7 @@ jobs:
 
           docker build -t qclaire/backend-api:$SHA -t qclaire/backend-api:latest ./backend-api
           docker build -t qclaire/frontend:$SHA -t qclaire/frontend:latest ./frontend
-          docker build -t qclaire/transaction-service:${{SHA}} -t qclaire/transaction-service:latest ./transaction-service
+          docker build -t qclaire/transaction-service:$SHA -t qclaire/transaction-service:latest ./transaction-service
 
           docker push qclaire/backend-api:$SHA
           docker push qclaire/backend-api:latest
