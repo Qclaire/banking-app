@@ -1,6 +1,6 @@
 // API Configuration
 const API_URL = '/api';
-const PROCESSOR_URL = 'http://core-banking-app-transaction-service:5000';
+const PROCESSOR_URL = '/transactions';
 
 // DOM Elements
 const dashboardView = document.getElementById('dashboard-view');
