@@ -40,7 +40,7 @@ jobs:
           cat ~/.kube/config  # Debug: Verify kubeconfig
 
       - name: Deploy Helm Chart
-        run: helm upgrade --install core-banking-app /home/cloudshell-user/core-banking-app/helm/core-banking-app --namespace default
+        run: helm upgrade --install core-banking-app ./helm/core-banking-app --namespace default
         env:
           KUBECONFIG: ${{ env.KUBECONFIG }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
