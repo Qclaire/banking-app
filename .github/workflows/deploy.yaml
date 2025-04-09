@@ -25,14 +25,24 @@ jobs:
           ./get_helm.sh
 
       - name: Build and Push Docker Images
+        env:
+          SHA: ${{ github.sha }}
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t qclaire/backend-api:latest ./backend-api
-          docker build -t qclaire/frontend:latest ./frontend
-          docker build -t qclaire/transaction-service:latest ./transaction-service
+
+          docker build -t qclaire/backend-api:$SHA -t qclaire/backend-api:latest ./backend-api
+          docker build -t qclaire/frontend:$SHA -t qclaire/frontend:latest ./frontend
+          docker build -t qclaire/transaction-service:$SHA -t qclaire/transaction-service:latest ./transaction-service
+
+          docker push qclaire/backend-api:$SHA
           docker push qclaire/backend-api:latest
+
+          docker push qclaire/frontend:$SHA
           docker push qclaire/frontend:latest
+
+          docker push qclaire/transaction-service:$SHA
           docker push qclaire/transaction-service:latest
+
       # - name: Update Helm Values
       #   run: |
       #     sed -i "s|backendApi.image: .*|backendApi.image: qclaire/backend-api:${{ github.sha }}|" ./helm/core-banking-app/values.yml
